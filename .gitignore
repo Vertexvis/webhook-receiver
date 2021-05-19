@@ -1,0 +1,14 @@
+.DS_Store
+scripts/dev.sh
+
+.cdk.staging
+.husky/
+.idea/
+.vscode/
+cdk.out
+coverage/
+lib/
+node_modules/
+src/**/*.js
+scripts/**/*.js
+*.d.ts

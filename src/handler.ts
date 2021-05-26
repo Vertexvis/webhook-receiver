@@ -1,4 +1,4 @@
-import { envVar } from "@vertexvis/api-client-node";
+import { envVar, prettyJson } from "@vertexvis/api-client-node";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { createHmac } from "crypto";
 import "source-map-support/register";
@@ -10,7 +10,7 @@ export function handler(evt: APIGatewayProxyEvent): APIGatewayProxyResult {
     return response(400, "Invalid request body.");
   }
 
-  const signature = evt.headers["x-request-signature-sha-256"];
+  const signature = evt.headers["x-vertex-signature"];
   if (!signature) {
     return response(400, "No signature.");
   }
@@ -19,22 +19,16 @@ export function handler(evt: APIGatewayProxyEvent): APIGatewayProxyResult {
     return response(400, "Invalid signature.");
   }
 
-  let webhook;
   try {
-    webhook = JSON.parse(evt.body);
+    const body = JSON.parse(evt.body);
+    console.log(
+      `Received ${evt.headers["x-vertex-topic"]}: ${prettyJson(body)}`
+    );
+
+    return response(200, "Success!");
   } catch (e) {
-    return response(400, "Invalid JSON.");
+    return response(400, "Invalid body.");
   }
-
-  console.log(
-    `Received ${webhook.data.attributes.topic}, body=${JSON.stringify(
-      webhook,
-      null,
-      2
-    )}`
-  );
-
-  return response(200, "Success!");
 }
 
 export function isSignatureValid(body: string, signature: string): boolean {

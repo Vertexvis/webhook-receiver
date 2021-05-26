@@ -1,6 +1,6 @@
 # webhook-receiver
 
-This example shows how to verify a Vertex webhook's payload with the `x-request-signature-sha-256` header.
+This example shows how to verify a Vertex webhook's payload with the `x-vertex-signature` header.
 
 ## Webhook Receiver
 

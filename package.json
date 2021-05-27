@@ -2,11 +2,11 @@
   "name": "webhook-receiver",
   "version": "0.1.0",
   "scripts": {
-    "build": "cd scripts && tsc",
+    "build": "./build.sh build",
+    "cdk": "./build.sh cdk",
     "clean": "rm -rf lib coverage",
-    "bootstrap": "./scripts/dev.sh bootstrap",
-    "deploy": "./scripts/dev.sh deploy",
-    "destroy": "./scripts/dev.sh destroy",
+    "deploy": "yarn cdk bootstrap && yarn cdk deploy",
+    "destroy": "yarn cdk destroy",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
     "lint": "eslint --ext .ts,.tsx,.js,.jsx --ignore-path ./.gitignore ."
   },

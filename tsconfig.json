@@ -9,17 +9,17 @@
     "module": "CommonJS",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "lib",
-    "rootDir": "src",
     "strict": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": false,
     "target": "ES2020"
   },
-  "include": ["src/**/*"],
-  "exclude": ["lib"]
+  "include": ["scripts/**/*", "src/**/*"],
+  "exclude": ["lib", "cdk.out"]
 }

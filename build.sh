@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
+export STAGE="dev"
 export AWS_REGION="us-west-2"
 export GIT_SHORT_REV
 GIT_SHORT_REV=$(git rev-parse --short HEAD)

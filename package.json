@@ -8,10 +8,10 @@
     "deploy": "yarn cdk bootstrap && yarn cdk deploy",
     "destroy": "yarn cdk destroy",
     "format": "prettier --write './**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|mdx|html|css)'",
-    "lint": "eslint --ext .ts,.tsx,.js,.jsx --ignore-path ./.gitignore ."
+    "lint": "eslint . --ext .ts"
   },
   "dependencies": {
-    "@vertexvis/api-client-node": "^0.12",
+    "@vertexvis/api-client-node": "^0.13",
     "source-map-support": "^0.5"
   },
   "devDependencies": {
@@ -21,6 +21,7 @@
     "@typescript-eslint/parser": "^4.25",
     "aws-cdk": "2.0.0-rc.4",
     "aws-cdk-lib": "2.0.0-rc.4",
+    "change-case": "^4.1.2",
     "constructs": "10.0",
     "esbuild": "^0.12",
     "eslint": "^7.27",

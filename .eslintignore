@@ -1,0 +1,4 @@
+cdk.out/
+coverage/
+lib/
+node_modules/

@@ -8,5 +8,9 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint"],
-  rules: {},
+  rules: {
+    "no-await-in-loop": "warn",
+    "no-return-await": "warn",
+    "require-await": "warn",
+  },
 };

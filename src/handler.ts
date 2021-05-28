@@ -1,21 +1,16 @@
-import { envVar, prettyJson } from "@vertexvis/api-client-node";
+import { envVar, isWebhookValid, prettyJson } from "@vertexvis/api-client-node";
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { createHmac } from "crypto";
 import "source-map-support/register";
 
-const WEBHOOK_SECRET = envVar("WEBHOOK_SECRET");
+const WebhookSecret = envVar("WEBHOOK_SECRET");
 
 export function handler(evt: APIGatewayProxyEvent): APIGatewayProxyResult {
-  if (!evt.body) {
-    return response(400, "Invalid request body.");
-  }
+  if (!evt.body) return response(400, "Invalid request body.");
 
   const signature = evt.headers["x-vertex-signature"];
-  if (!signature) {
-    return response(400, "No signature.");
-  }
+  if (!signature) return response(400, "No signature.");
 
-  if (!isSignatureValid(evt.body, signature)) {
+  if (!isWebhookValid(evt.body, WebhookSecret, signature)) {
     return response(400, "Invalid signature.");
   }
 
@@ -25,17 +20,12 @@ export function handler(evt: APIGatewayProxyEvent): APIGatewayProxyResult {
       `Received ${evt.headers["x-vertex-topic"]}: ${prettyJson(body)}`
     );
 
+    // TODO: Take action on the webhook event.
+
     return response(200, "Success!");
   } catch (e) {
     return response(400, "Invalid body.");
   }
-}
-
-export function isSignatureValid(body: string, signature: string): boolean {
-  return (
-    signature ===
-    createHmac("sha256", WEBHOOK_SECRET).update(body).digest("hex")
-  );
 }
 
 export function response(
